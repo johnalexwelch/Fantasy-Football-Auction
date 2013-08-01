@@ -1,0 +1,59 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="style/landing.css" />
+        <link rel="stylesheet" type="text/css" href="style/home.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="js/validate.js"></script>
+    </head>
+    <body>
+        <div id="mainWrapper">
+            <div id="content">
+                <div id="formContainer">
+                    <div class="error_box"></div>
+                    <form method="post" action="scripts/signin.php" name="signinform" id=signinform">
+                        <p class="email">
+                            <input type="text" name="email" id="email" />
+                            <label for="email" class="labelText">Email</label>
+                        </p>
+                        <p class="text">
+                            <input type="password" name="password" id="password" />
+                            <label for="password" class="labelText">Password</label>
+                        </p>
+                        <p class="submit">
+                            <input type="submit" id= "submit" name="submit" value="Sign in">
+                        </p>
+                    </form>
+                </div>
+                <div id="hyperlink">
+                    <a href="signup.html">Sign Up</a>
+                </div>
+            </div>
+        </div>
+            
+    <script type="text/javascript">
+        new FormValidator('signinform', [
+            {name: 'password', rules: 'required'},
+            {name: 'email', rules: 'required|valid_email'},],
+            
+            function(errors, event) {
+                var SELECTOR_ERRORS = $('.error_box');
+                    
+                if (errors.length > 0) {
+                    SELECTOR_ERRORS.empty();
+                    
+                    for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+                        SELECTOR_ERRORS.append(errors[i].message + '<br />');
+                    }
+                    SELECTOR_ERRORS.fadeIn(200);
+                } else {
+                    SELECTOR_ERRORS.css({ display: 'none' });
+                    document.forms["signinform"].submit()
+                }
+                
+            }
+            );
+    </script>
+</body>
+</html>

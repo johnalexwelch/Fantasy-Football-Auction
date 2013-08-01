@@ -1,0 +1,145 @@
+<html>
+    <head>
+<!--		<meta http-equiv="refresh" content="5; URL=http://localhost:8888/Auction/home.php">-->
+        <title></title>
+		<link rel="stylesheet" type="text/css" href="style/landing.css" />
+		<link rel="stylesheet" type="text/css" href="style/home.css" />
+		
+		<script type="text/javascript" src="js/validate.js"></script>
+		<script type="text/javascript" src="js/counter.js"></script>
+    </head>
+    <body>
+		<div id="sideNav">
+			<div id="start""><h2>Start A New Auction</h2></div>
+			<div id="live"><h2>Live Auctions</h2></div>
+		</div>
+		<div id="mainWrapper">
+			<div id="mainNav">
+				<nav>
+					<ul>
+						<li><a href="scripts/logout.php"> Log Out </a></li>
+						<li><a href="winners.php">Past Winners</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+			<div id="mainInfo">
+				<header>
+					<h1 class="teamName">NAME</h1>
+					<h2 class="bankRoll">$Money</h2>
+				</header>
+			</div>
+			
+			<section>
+				<div id="playerSelect">
+					<div class="error_box"></div>
+					<?php echo $errorMsg;?>
+					<form id="nominateForm" method="post" name="nominateForm" action="<?php echo $_SERVER['PHP_SELF'];?>">
+						<div id="formRow">
+							<div id="formSection"><label for="lName">Player's First Name </label></div>
+							<div id="formSection"><input type="text" name="fName" id="fName"/></div>
+						</div>
+						<div id="formRow">
+							<div id="formSection"><label for="lName">Player's Last Name </label></div>
+							<div id="formSection"><input type="text" name="lName" id="lName"/></div>
+						</div>
+						<div id="formRow">
+							<div id="formSection"><label for="teams"> Team </label></div>
+							<div id="formSection">
+								<select class="styled-select" name="teams" id="teams">
+									<option value="Cardinals"> Arizona Cardinals</option>
+									<option value="Falcons"> Atlanta Falcons</option>
+									<option value="Bill"> Buffalo Bills</option>
+									<option value="Ravens"> Baltimore Ravens</option>
+									<option value="Bears"> Chicago Bears</option>
+									<option value="Bengals"> Cincinnati Bengals</option>
+									<option value="Browns"> Cleveland Browns</option>
+									<option value="Panthers"> Carolina Panthers</option>
+									<option value="Cowboys"> Dallas Cowboys</option>
+									<option value="Broncos"> Denver Broncos</option>
+									<option value="Lions"> Detroit Lions</option>
+									<option value="Packers"> Green Bay Packers</option>
+									<option value="Texans"> Houston Texans</option>
+									<option value="Colts"> Indianapolis Colts</option>
+									<option value="Jaguars"> Jacksonville Jaguars</option>
+									<option value="Cheifs"> Kansas City Cheifs</option>
+									<option value="Dolphins"> Miami Dolphins</option>
+									<option value="Vikings"> Minnesota Vikings</option>
+									<option value="Patriots"> New England Patriots</option>
+									<option value="Giants"> New York Giants</option>
+									<option value="Jets"> New York Jets</option>
+									<option value="Saints"> New Orleans Saints</option>
+									<option value="Raiders"> Oakland Raiders</option>
+									<option value="Eagles"> Philadelphia Eagles</option>
+									<option value="Steelers"> Pittsburgh Steelers </option>
+									<option value="Chargers"> San Diego Chargers</option>
+									<option value="49ers"> San Francisco 49ers</option>
+									<option value="Rams"> St Louis Rams</option>
+									<option value="Seahawks"> Seattle Seahawks</option>
+									<option value="Buccaneers"> Tampa Bay Buccaneers</option>
+									<option value="Titans"> Tennessee Titans</option>
+									<option value="Redskins"> Washington Redskins</option>
+								</select></div>
+						</div>
+						<div id="formRow">
+							<div id="formSection"><label for="position"> Position </label></div>
+							<div id="formSection">
+								<select class="styled-select" name="position" id="position">
+									<option value="qb"> QB </option>
+									<option value="qb"> RB </option>
+									<option value="qb"> WR </option>
+									<option value="qb"> TE </option>
+									<option value="qb"> K </option>
+									<option value="qb"> DEF </option>
+									
+								</select></div>
+						</div>
+						<div id="formRow">
+							<div id="formSection"><label for="bid">Starting Bid </label></div>
+							<div id="formSection"><input type="text" name="bid" id="bid"></div>
+						</div>
+						<!--<?php echo $message;?>-->
+						<div id="formRow">
+							<div id="formSection">
+								<div id="buttonRow">
+									<p class="submit">
+										<input type="submit" id= "submit" name="submit"  value="Submit" <?php echo $disabled; ?>/>
+									</p>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div id="liveAuctions">
+					<?php echo $feedDisplayList; ?>
+				</div>
+			</section>
+		</div>
+		<script type="text/javascript">
+		new FormValidator('nominateForm', [
+            {name: 'fName', rules: 'required'},
+            {name: 'lName', rules: 'required'},
+            {name: 'bid', rules: 'required'},
+            //{name: 'code', rules: 'required'},
+            ],
+            
+            
+            function(errors, event) {
+                var SELECTOR_ERRORS = $('.error_box');
+                    
+                if (errors.length > 0) {
+                    SELECTOR_ERRORS.empty();
+                    
+                    for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+                        SELECTOR_ERRORS.append(errors[i].message + '<br />');
+                    }
+                    SELECTOR_ERRORS.fadeIn(200);
+                } else {
+                    SELECTOR_ERRORS.css({ display: 'none' });
+                }
+                
+            }
+            );
+    </script>
+      </body>
+</html>
